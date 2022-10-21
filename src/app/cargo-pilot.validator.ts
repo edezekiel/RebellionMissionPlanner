@@ -4,7 +4,7 @@ import {
   AsyncValidatorFn,
   ValidationErrors,
 } from '@angular/forms';
-import { forkJoin, map, Observable, of } from 'rxjs';
+import { forkJoin, map, Observable, of, switchMap, timer } from 'rxjs';
 import { Rebel, Starship, StarWarsApiService } from './star-wars-api.service';
 
 @Injectable({
@@ -23,15 +23,20 @@ export class CargoPilotValidator {
       if (!(starshipUrls.length > 0)) {
         return of({ experiencedPilotRequired: this._cargoPilotError() });
       }
-      return forkJoin(
-        starshipUrls.map((url) => this._starWarsApiService.getStarship(url))
-      ).pipe(
-        map((results) => {
-          const maxCargo = this._getMaxCargo(results);
-          return maxCargo < cargo
-            ? { experiencedPilotRequired: this._cargoPilotError(maxCargo) }
-            : null;
-        })
+
+      return timer(500).pipe(
+        switchMap(() =>
+          forkJoin(
+            starshipUrls.map((url) => this._starWarsApiService.getStarship(url))
+          ).pipe(
+            map((results) => {
+              const maxCargo = this._getMaxCargo(results);
+              return maxCargo < cargo
+                ? { experiencedPilotRequired: this._cargoPilotError(maxCargo) }
+                : null;
+            })
+          )
+        )
       );
     };
   }
