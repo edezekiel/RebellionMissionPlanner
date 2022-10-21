@@ -23,7 +23,12 @@ import { Rebel } from './star-wars-api.service';
       >
         <section>
           <div><label for="cargo">Expected Heist (kilograms): </label></div>
-          <input id="cargo" type="number" formControlName="cargo" />
+          <input
+            id="cargo"
+            type="number"
+            formControlName="cargo"
+            autocomplete="off"
+          />
         </section>
 
         <section formArrayName="rebels">
