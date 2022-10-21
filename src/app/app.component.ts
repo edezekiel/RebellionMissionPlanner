@@ -1,8 +1,8 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { map } from 'rxjs';
-import { MissionEditorComponent } from './components/mission-editor.component';
-import { StarWarsApiService } from './services/star-wars-api.service';
+import { MissionEditorComponent } from './mission-editor.component';
+import { StarWarsApiService } from './star-wars-api.service';
 
 @Component({
   standalone: true,

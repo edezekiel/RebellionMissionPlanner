@@ -1,7 +1,7 @@
 import { JsonPipe, NgFor } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { FormArray, FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { Rebel } from '../services/star-wars-api.service';
+import { Rebel } from './star-wars-api.service';
 
 @Component({
   standalone: true,
