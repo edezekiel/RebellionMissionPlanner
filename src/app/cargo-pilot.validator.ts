@@ -46,7 +46,7 @@ export class CargoPilotValidator {
       (a, b) => a.cargo_capacity - b.cargo_capacity
     );
 
-    return sorted.at(sorted.length - 1)?.cargo_capacity as number;
+    return sorted[sorted.length - 1]?.cargo_capacity as number;
   }
 
   private _cargoPilotError(maxCargo?: number) {
