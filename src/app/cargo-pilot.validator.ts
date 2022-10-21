@@ -37,15 +37,14 @@ export class CargoPilotValidator {
   }
 
   private _getStarshipUrls(rebels: Rebel[]): string[] {
-    return rebels
-      .map((rebel) => rebel?.starships ?? [])
-      .flatMap((starshipUrl) => starshipUrl);
+    const starships = rebels.map((rebel) => rebel?.starships ?? [])
+    return this._flatMap(starships, (starshipUrl) => starshipUrl);
   }
 
   private _getMaxCargo(starships: Starship[]): number {
-    const sorted = starships
-      .flatMap((starships) => starships)
-      .sort((a, b) => a.cargo_capacity - b.cargo_capacity);
+    const sorted = starships.sort(
+      (a, b) => a.cargo_capacity - b.cargo_capacity
+    );
 
     return sorted.at(sorted.length - 1)?.cargo_capacity as number;
   }
@@ -54,5 +53,12 @@ export class CargoPilotValidator {
     return `Your team needs a qualified pilot. Current Max Cargo: ${
       maxCargo ?? 0
     }`;
+  }
+
+  private _flatMap<T, U>(array: T[], mapFunc: (x: T) => U[]): U[] {
+    return array.reduce(
+      (cumulus: U[], next: T) => [...mapFunc(next), ...cumulus],
+      <U[]>[]
+    );
   }
 }
