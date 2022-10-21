@@ -37,7 +37,7 @@ export class CargoPilotValidator {
   }
 
   private _getStarshipUrls(rebels: Rebel[]): string[] {
-    const starships = rebels.map((rebel) => rebel?.starships ?? [])
+    const starships = rebels.map((rebel) => rebel?.starships ?? []);
     return this._flatMap(starships, (starshipUrl) => starshipUrl);
   }
 
