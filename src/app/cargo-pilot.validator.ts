@@ -16,7 +16,7 @@ export class CargoPilotValidator {
   checkForQualifiedPilot(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       const { cargo, rebels } = control.value;
-      if (!cargo || !rebels || !rebels.length) return of(null);
+      if (!(cargo && rebels && rebels.length)) return of(null);
 
       const starshipUrls = this._getStarshipUrls(rebels);
 
