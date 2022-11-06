@@ -7,17 +7,19 @@ import {
   Validators,
 } from '@angular/forms';
 import { CargoPilotValidator } from './cargo-pilot.validator';
+import { FormEffectDirective } from './directives/form-effect.directive';
 import { Rebel } from './star-wars-api.service';
 
 @Component({
   standalone: true,
   selector: 'app-mission-editor',
-  imports: [ReactiveFormsModule, NgFor, JsonPipe, NgIf],
+  imports: [ReactiveFormsModule, NgFor, JsonPipe, NgIf, FormEffectDirective],
   template: `
     <div class="mission-editor">
-      <h1>Mission Editor</h1>
+      <h1>Mission Editor</h1> 
       <form
         [formGroup]="missionEditor"
+        appFormEffect="first"
         (ngSubmit)="dispatchRebels()"
         class="mission-editor__form"
       >
